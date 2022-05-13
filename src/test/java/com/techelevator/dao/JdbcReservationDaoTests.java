@@ -1,9 +1,11 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Reservation;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,6 +16,13 @@ public class JdbcReservationDaoTests extends BaseDaoTests {
     @Before
     public void setup() {
         dao = new JdbcReservationDao(dataSource);
+    }
+
+    @Test
+    public void getUpcomingReservations_Should_ReturnUpcomingReservationsInChronologicalOrder() {
+        List<Reservation> reservations = dao.getUpcomingReservations(1);
+
+        assertEquals(2, reservations.size());
     }
 
     @Test
